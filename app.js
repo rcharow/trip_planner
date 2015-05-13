@@ -10,7 +10,7 @@ var routes = require('./routes/index')
 var app = express()
 
 app.use(sassMiddleware({
-    src: __dirname,
+    src: __dirname + '/assets',
     dest: path.join(__dirname, 'public'),
     debug: true,
     outputStyle: 'compressed',
@@ -26,7 +26,9 @@ app.set('view engine','html')
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false}))
+console.log("DIR",path.join(__dirname,'public'))
 app.use(express.static(path.join(__dirname,'public')))
+app.use('/bower_components',express.static(path.join(__dirname,'bower_components')))
 
 app.use('/',routes)
 
@@ -46,5 +48,5 @@ app.use(function(err, req, res, next) {
     	error: err
     })
 });
-
+//comment
 module.exports = app;
