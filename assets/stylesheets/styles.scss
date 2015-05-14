@@ -26,6 +26,8 @@ h5 {
 
 .block-select{
 	display: block;
+	width: calc(100% - 30px);
+	margin:0;
 }
 
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-brand {
@@ -38,18 +40,19 @@ h5 {
 }
 
 .col-lg-9{
-	height:100%;
+	//height:100%;
 	border-color: black;
 }
 
 .col-lg-3{
-	height: 100%;
+	//height: 100%;
 	background-color: #D9D1B8;
 	padding-top: 50px;
 }
 
 .panel {
 	border-radius: 8px;
+
 }
 
 .panel-heading {
@@ -61,19 +64,45 @@ h5 {
 	color:#AD8B6D;
 }
 
+.btn-delete-circle {
+	border-radius:50%;
+	height:20px;
+	width:20px;
+	font-size: 12px;
+	line-height: 42%;
+}
+
+.btn-add-circle {
+	border-radius:50%;
+	height:20px;
+	width:20px;
+	font-size: 12px;
+	line-height: 42%;
+}
+
 .btn-active {
 	background-color: #AD8B6D;
 	color: white;
 	border-color: gray;
+
 }
 
-#tripDay {
-	margin: 10px auto;
+.title{
+	width: calc(100% - 25px);
+}
+
+
+#day-title {
+	text-align: center;
 	border: solid 1px #5E8860;
 	border-radius: 6px;
-	width: 60px;
 	padding: 4px;
 	color: #5E8860;
+}
+
+#map {
+	height: 110vh;
+
 }
 
 

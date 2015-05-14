@@ -18,6 +18,9 @@ router.get('/',function(req,res,next){
 				cb(err,mapToField(docs,"name"))
 			})
 		},
+		// hotels: function(cb){
+		// 	models.Hotel.find(cb);
+		// },
 		restaurants: function(cb){
 			models.Restaurant.find({},function(err,docs){
 				cb(err,mapToField(docs,"name"))
@@ -35,11 +38,47 @@ router.get('/',function(req,res,next){
 			restaurants: results.restaurants, 
 			things: results.things
 		})
+		//res.json(results)
 	})
 
 	
 })
 
+//promises alternative
+// router.get('/slowPromises',function(req,res,next){
+// 	//exec returns a promise
+// 	models.Hotel.find().exec()
+// 	.find()
+// 	.exec()
+// 	.then(function(hotels){
+// 		res.locals.hotels = hotels
+// 		return models.Restaurant.find().exec()
+// 	})
+// 	.then(function(restaurants){
+// 		res.locals.restaurants = restaurants
+// 		return models.ThingToDo.find().exec()
+// 	})
+// 	.then(function(thingsToDo){
+// 		res.locals.thingsToDo = thingsToDo
+// 		res.json()
+// 	})
+// })
+
+//async promises alternative
+// var Promise = require('bluebird')
+// router.get('/fastPromises',function(req,res,next){
+// 	Promise.join(models.Hotel.find().exec(),
+// 		models.Restaurant.find().exec(),
+// 		models.ThingToDo.find().exec()
+// 	)
+// 	.spread(function(hotels, restaurants, thingsToDo){
+// 		res.json({
+// 			hotels: hotels,
+// 			restaurants: restaurants,
+// 			thingsToDo: thingsToDo
+// 		})
+// 	})
+// })
 
 
 module.exports = router
