@@ -10,6 +10,7 @@ function addHotel(){
 		'<button class="btn btn-xs btn-danger remove btn-delete-circle pull-right">x</button></div>')
 		.appendTo('#hotelList')
 
+		updateItinerary(parseInt($('#days>.btn-active').text()))
 	}
 
 }
@@ -20,6 +21,8 @@ function addThing(){
 		'<span class="title">'+ $('#cboThing').val() + '</span>' +
 		'<button class="btn btn-xs btn-danger remove btn-delete-circle pull-right">x</button></div>')
 		.appendTo('#thingsList')
+
+		updateItinerary(parseInt($('#days>.btn-active').text()))
 	}
 }
 
@@ -30,21 +33,27 @@ function addRestaurant(){
 			'<span class="title">'+ $('#cboRestaurant').val() + '</span>' +
 			'<button class="btn btn-xs btn-danger remove btn-delete-circle pull-right">x</button></div>')
 			.appendTo('#restaurantList')
+
+			updateItinerary(parseInt($('#days>.btn-active').text()))
 		}
 	}
 }
 
 function addDay(){
+	var zero = itinerary[0]
+	console.log(zero.find('#restaurantList'))
+	debugger
 	var days = $('#days').children().length
 	$('<button class="btn btn-default btn-circle days">'+ days +'</button>').insertBefore(".add")
-	itinerary.push(undefined)
-	if(days===1) changeDay.call($('#days').children()[0])
+	var emptyItinerary = itinerary[0].clone(true)
+	itinerary.push(emptyItinerary)
+	changeDay.call($('#days').children()[days-1])
 }
 
-function updateItinerary(){
-		// var curDay = itinerary[parseInt($(this).text())] || itinerary[0]
-		
-		// $('#itinerary').replaceWith(curDay)
+function updateItinerary(day){
+	console.log("DAY",day)
+	var clone = $(('#itinerary')).clone(true)
+	itinerary[day] = clone
 }
 
 function removeDay(){
@@ -79,31 +88,25 @@ function removeDay(){
 
 function removeItineraryItem(){
 	$(this).parent().remove()
+	updateItinerary(parseInt($('#days>.btn-active').text()))
 }
 
 function changeDay(){
 	debugger
-	var clone
 	var prevDay = $('#days>.btn-active')
 	$(this).addClass('btn-active')
 	$('#day-title').text("Day "+ $(this).text())
+
 	if(prevDay.length){
 		prevDay.removeClass('btn-active')
-		clone = $('#itinerary').clone(true)
-		itinerary[parseInt(prevDay.text())+1] = clone
-
-		//replace prev day with current day
-		// var curDay = itinerary[parseInt($(this).text())] || itinerary[0]
-		
-		// $('#itinerary').replaceWith(curDay)
+		var curDay = itinerary[parseInt($(this).text())]
+		$('#itinerary').replaceWith(curDay)
 	}
-	else{
-		//itinerary[0]=($('#itinerary').clone(true))
-	}
+	
 }
 
 $(document).ready(function() {
-    itinerary[0]=($('#itinerary').clone(true))
+    itinerary[0]=$('#itinerary').clone(true)
 });
 
 $('#btnAddHotel').on('click',addHotel)
