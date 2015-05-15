@@ -14,29 +14,23 @@ router.get('/',function(req,res,next){
 
 	async.parallel({
 		hotels: function(cb){
-			models.Hotel.find({},function(err,docs){
-				cb(err,mapToField(docs,"name"))
-			})
+			models.Hotel.find(cb)
 		},
 		// hotels: function(cb){
 		// 	models.Hotel.find(cb);
 		// },
 		restaurants: function(cb){
-			models.Restaurant.find({},function(err,docs){
-				cb(err,mapToField(docs,"name"))
-			})
+			models.Restaurant.find(cb)
 		},
-		things: function(cb){
-			models.ThingToDo.find({},function(err,docs){
-				cb(err,mapToField(docs,"name"))
-			})
+		things_to_do: function(cb){
+			models.ThingToDo.find(cb)
 		}
 	},function(err,results){
 		if(err) next(err)
 		res.render('index',{
 			hotels: results.hotels,
 			restaurants: results.restaurants, 
-			things: results.things
+			things_to_do: results.things_to_do
 		})
 		//res.json(results)
 	})
