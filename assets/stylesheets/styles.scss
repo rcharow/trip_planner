@@ -14,7 +14,7 @@ body{
 	margin-top: 51px;
 }
 
-h5 {
+h4,h5 {
 	color:#AD8B6D;
 }
 
@@ -62,6 +62,7 @@ h5 {
 .btn-circle {
 	border-radius: 30px;
 	color:#AD8B6D;
+	margin-right: 5px;
 }
 
 .btn-delete-circle {
@@ -78,9 +79,10 @@ h5 {
 	width:20px;
 	font-size: 12px;
 	line-height: 42%;
+
 }
 
-.btn-active {
+.btn-active, .btn-active:focus {
 	background-color: #AD8B6D;
 	color: white;
 	border-color: gray;
